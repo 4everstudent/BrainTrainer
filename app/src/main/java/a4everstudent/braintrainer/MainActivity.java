@@ -3,7 +3,7 @@ package a4everstudent.braintrainer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-// TODO: 05-10-2016 first screen - goButton
+
 // TODO: 05-10-2016 main screen :
 // TODO: 05-10-2016 timeLeft, question, correct/total questions, answers, feedback
 // TODO: 05-10-2016 countdowntimer connected to TimeLeft
