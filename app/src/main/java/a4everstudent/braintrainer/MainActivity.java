@@ -3,6 +3,7 @@ package a4everstudent.braintrainer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -12,8 +13,6 @@ import java.util.Random;
 
 // TODO: 05-10-2016 main screen :
 // TODO: 05-10-2016 countdowntimer connected to TimeLeft
-// TODO: 05-10-2016 variables correct answer, total questions
-// TODO: 05-10-2016 onClick on buttons, correct or wrong?
 // TODO: 05-10-2016 update function
 // TODO: 05-10-2016 last screen: show score, show button
 // TODO: 05-10-2016 playAgain function
@@ -28,8 +27,25 @@ public class MainActivity extends AppCompatActivity {
     int gameDuration = 30;
     ArrayList<Integer> answers = new ArrayList<Integer>();
     int locationOfCorrectAnswer;
+    TextView feedback;
+    int score = 0;
+    int total = 0;
+    TextView correctTotal;
 
-
+    public void updateScore(){
+        total++;
+        correctTotal.setText(Integer.toString(score)+ "/"+ Integer.toString(total));
+    }
+    public void chooseAnswer(View view){
+        if(view.getTag().toString().equals(Integer.toString(locationOfCorrectAnswer))){
+            feedback.setText("Correct!");
+            score++;
+        }
+        else{
+            feedback.setText("Wrong!");
+        }
+        updateScore();
+    }
     public void timeLeft(int gameDuration){
 
 
@@ -95,8 +111,9 @@ public class MainActivity extends AppCompatActivity {
         button3.setText(Integer.toString(answers.get(2)));
         button4.setText(Integer.toString(answers.get(3)));
 
+        feedback = (TextView) findViewById(R.id.feedbackTextView);
 
-
+        correctTotal = (TextView) findViewById(R.id.correctTotalAnswersView);
 
     }
 }

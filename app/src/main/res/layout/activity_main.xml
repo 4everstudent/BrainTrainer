@@ -35,18 +35,6 @@
         android:layout_alignParentRight="true" />
 
 
-    <TextView
-        android:text="Correct/Wrong "
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="71dp"
-        android:id="@+id/feedbackTextView"
-        android:textStyle="normal|bold"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -133,6 +121,18 @@
         android:id="@+id/questionView"
         android:textStyle="normal|bold"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Correct/Wrong "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="74dp"
+        android:id="@+id/feedbackTextView"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
 
