@@ -1,5 +1,6 @@
 package a4everstudent.braintrainer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -10,25 +11,28 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Random;
 
-
-// TODO: 05-10-2016 main screen :
-// TODO: 05-10-2016 countdowntimer connected to TimeLeft
-// TODO: 05-10-2016 last screen: show score, show button
-// TODO: 05-10-2016 playAgain function
 // TODO: 07-10-2016 FutureFeatures: wrong and right sounds
 // TODO: 07-10-2016 FF: settings - choose gameDuration
-// TODO: 07-10-2016 FF: finish sound 
+// TODO: 07-10-2016 FF: finishing sound
 
 public class MainActivity extends AppCompatActivity {
 
     TextView timeLeftTextView, feedback, correctTotal, questionTextView;
     CountDownTimer countDownTimer;
-    int gameDuration = 30;
-    ArrayList<Integer> answers;
+    int gameDuration = 30000;
+    ArrayList<Integer> answers = new ArrayList<Integer>();
     int locationOfCorrectAnswer;
-    int score = 0;
-    int total = 0;
+    static int score = 0;
+    static int total = 0;
     Button button1, button2, button3, button4;
+
+    public static int getScore(){
+        return score;
+    }
+
+    public int getTotal(){
+        return total;
+    }
 
     public void generateQuestion(){
         Random rand = new Random();
@@ -36,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         int b = rand.nextInt(21);
 
         questionTextView.setText(Integer.toString(a)+ " + " +Integer.toString(b));
-        answers = new ArrayList<Integer>();
+        answers.clear();
         locationOfCorrectAnswer = rand.nextInt(4);
 
         int incorrectAnswer;
@@ -82,17 +86,20 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        countDownTimer = new CountDownTimer(gameDuration, 1000) {
+        countDownTimer = new CountDownTimer(gameDuration+100, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
                 //update the timer text view
-                timeLeftTextView.setText((int)millisUntilFinished /1000);
+                timeLeftTextView.setText(String.valueOf(millisUntilFinished /1000) + "s");
             }
 
             @Override
             public void onFinish() {
-                timeLeftTextView.setText("00:00");
+                Intent lastScreen = new Intent(MainActivity.this, FinishGame.class);
+                MainActivity.this.startActivity(lastScreen);
+                timeLeftTextView.setText("0s");
+
 
             }
         }.start();
@@ -113,7 +120,13 @@ public class MainActivity extends AppCompatActivity {
         questionTextView = (TextView) findViewById(R.id.questionView);
         feedback = (TextView) findViewById(R.id.feedbackTextView);
         correctTotal = (TextView) findViewById(R.id.correctTotalAnswersView);
+        resetLastPlay();
         generateQuestion();
 
+    }
+
+    public void resetLastPlay(){
+        score =0;
+        total = 0;
     }
 }
