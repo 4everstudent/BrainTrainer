@@ -128,5 +128,6 @@ public class MainActivity extends AppCompatActivity {
     public void resetLastPlay(){
         score =0;
         total = 0;
+        correctTotal.setText(Integer.toString(score)+ "/"+ Integer.toString(total));
     }
 }
